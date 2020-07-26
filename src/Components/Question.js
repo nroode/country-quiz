@@ -7,31 +7,47 @@ import React from "react";
 class Question extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
+    this.state = {};
   }
-
-
 
   //set question type - capital or flag question
   //
 
   //cycle through questions in groups of 4
 
+  questionA() {
+    return (
+      <div>
+        <img src={this.props.questionSet[0].flag} width="200"></img>
+        <h2>{this.props.questionSet[0].capital} is the capital of ... ?</h2>
+      </div>
+    );
+  }
+
+  questionB() {
+    return (
+      <div>
+        <img src={this.props.questionSet[0].flag} width="200"></img>
+        <h2>Which country does this flag belong to? </h2>
+      </div>
+    );
+  }
 
   render() {
-    
+    console.log(this.props.quizData);
     return (
       <div>
         <div className="card-container">
-          <h2>question</h2>
-          <ol>
-            <li>answer 1</li>
-            <li>answer 2</li>
-            <li>answer 3</li>
-            <li>answer 4</li>
-          </ol>
+          {this.props.quiz.questionVersion === "capital"
+            ? this.questionA()
+            : this.questionB()}
+
+          <ul>
+            {this.props.questionSet.map((country) => (
+              <li> {country.name} </li>
+            ))}
+          </ul>
+          <button onClick={() => this.props.renderPage(this.props.quizData)}>Next</button>
         </div>
       </div>
     );
