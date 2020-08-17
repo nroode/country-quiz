@@ -18,12 +18,10 @@ class App extends React.Component {
       countryData: [],
       quizData: [],
       questionSet: [],
-      quiz: {
-        page: 1,
-        questionVersion: 'capital',
-        correctIndex: 0,
-        correctAnswers: 0,
-      }
+      quizQuestionVersion: 'capital',
+      quizPage: 1,
+      quizAnswerIndex: 0,
+      quizCorrectAnswers: 0,
     };
   }
 
@@ -64,9 +62,11 @@ class App extends React.Component {
     //randomly select 24 indices
     while (countrySelects.length < 24) {
       var r = Math.floor(Math.random() * 250);
+      //make sure country isn't included already 
       if (countrySelects.indexOf(r) === -1) countrySelects.push(r);
     }
-    this.setState({ countrySelects });
+
+    this.setState({ countrySelects});
     this.getQuizData(countrySelects);
   }
 
@@ -85,9 +85,7 @@ class App extends React.Component {
       quizData.push(this.state.countryData.find((el, j) => quizSelects[i] === j))
     }
     // console.log(quizData);
-    // this.setState({ quizData });
-    // console.log(this.state.quizData);
-
+  
     this.setState({ quizData });
     this.renderPage(quizData);
     // this.renderPage(quizData);
@@ -121,19 +119,32 @@ class App extends React.Component {
 
   }
 
+
+
   //either start page, question, or results
 
-  renderPage = (quizData, page = this.state.quiz.page, questionsPerPage = 4) => {
+  renderPage = (quizData, page = this.state.quizPage, questionsPerPage = 4) => {
     console.log(quizData);
+    
+
     const start = (page - 1) * questionsPerPage;
     const end = questionsPerPage * page;
 
     let questionSet = quizData.slice(start, end);
-    this.setState({ questionSet })
-    // quizData.map(answer => <ol><li> {answer.name} </li></ol>)
-    // console.log(countryList.slice(start, end));
 
+    var quizAnswerIndex = Math.floor(Math.random() * 4);
+    // console.log(answerIndex);
+
+    console.log(this.state.quizPage);
+    this.setState({ questionSet, quizAnswerIndex })
+    this.setState(prevState => ({ quizPage: prevState.quizPage++ }));
+    
   };
+
+  nextQuestion = () => {
+    console.log(`the page is ${this.state.quizPage}`)
+    this.renderPage(this.state.quizData, this.state.quizPage );
+  }
 
   //user clicks an answer
 
@@ -153,8 +164,11 @@ class App extends React.Component {
             <Question 
             quizData={this.state.quizData}
             renderPage={this.renderPage}
-            quiz={this.state.quiz}
+            quizAnswerIndex={this.state.quizAnswerIndex}
+            quizQuestionVersion={this.state.quizQuestionVersion}
             questionSet={this.state.questionSet}
+            quizPage={this.state.quizPage}
+            nextQuestion={this.nextQuestion}
              />
           )}
         </div>
