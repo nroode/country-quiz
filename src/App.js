@@ -18,10 +18,11 @@ class App extends React.Component {
       countryData: [],
       quizData: [],
       questionSet: [],
-      quizQuestionVersion: 'capital',
+      quizQuestionVersion: 'flag',
       quizPage: 1,
       quizAnswerIndex: 0,
       quizCorrectAnswers: 0,
+      isAnswerPicked: false,
     };
   }
 
@@ -133,7 +134,7 @@ class App extends React.Component {
     let questionSet = quizData.slice(start, end);
 
     var quizAnswerIndex = Math.floor(Math.random() * 4);
-    // console.log(answerIndex);
+    console.log(quizAnswerIndex);
 
     console.log(this.state.quizPage);
     this.setState({ questionSet, quizAnswerIndex })
@@ -141,7 +142,18 @@ class App extends React.Component {
     
   };
 
+  hideNext = () => {
+    this.setState({ isAnswerPicked: true })
+  }
+
   nextQuestion = () => {
+    //remove next button
+    this.setState({ isAnswerPicked: false });
+
+    //clear any right/wrong colors
+    let choices = document.querySelectorAll('.answer-choice');
+    choices.forEach(item => item.className = "answer-choice");
+
     console.log(`the page is ${this.state.quizPage}`)
     this.renderPage(this.state.quizData, this.state.quizPage );
   }
@@ -169,6 +181,8 @@ class App extends React.Component {
             questionSet={this.state.questionSet}
             quizPage={this.state.quizPage}
             nextQuestion={this.nextQuestion}
+            isAnswerPicked={this.state.isAnswerPicked}
+            hideNext={this.hideNext}
              />
           )}
         </div>

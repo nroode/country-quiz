@@ -9,7 +9,9 @@ import React from "react";
 class Question extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      
+    };
   }
 
   //set question type - capital or flag question
@@ -21,7 +23,6 @@ class Question extends React.Component {
     console.log(this.props.quizAnswerIndex)
     return (
       <div>
-        <img src={this.props.questionSet[this.props.quizAnswerIndex].flag} width="200"></img>
         <h2>{this.props.questionSet[this.props.quizAnswerIndex].capital} is the capital of ... ?</h2>
       </div>
     );
@@ -37,22 +38,42 @@ class Question extends React.Component {
     );
   }
 
-  render() {
-    console.log(this.props.quizQuestionVersion);
+  checkAnswer = (e) => {
+    //check if IDs match 
+
+    console.log(Number(e.target.id));
+    console.log(this.props.quizAnswerIndex);
+
+    if (Number(e.target.id) !== this.props.quizAnswerIndex) {
+      e.target.className = "answer-choice incorrect";
+    } 
     
+    let correctAnswer = document.getElementById(this.props.quizAnswerIndex);
+    correctAnswer.className = "answer-choice correct";
+        
+    //display nextButton
+    this.props.hideNext();
+
+  }
+
+  render() {
+    // console.log(this.props.quizQuestionVersion);
+    // console.log(this.props.quizAnswerIndex);
     return (
       <div>
-        <div className="card-container">
+        <div className="card-container__inner">
           {this.props.quizQuestionVersion === "capital"
             ? this.questionA()
             : this.questionB()}
 
-          <ul>
-            {this.props.questionSet.map((country) => (
-              <li> {country.name} </li>
+          <ul className="answer-choices">
+            {this.props.questionSet.map((country, id) => (
+              <li id={id} key={id} className="answer-choice" onClick={this.checkAnswer}> {country.name} </li>
             ))}
           </ul>
-          <button onClick={() => this.props.nextQuestion()}>Next</button>
+          {this.props.isAnswerPicked ? 
+          <button onClick={() => this.props.nextQuestion()}>Next</button> :
+          ''}
         </div>
       </div>
     );

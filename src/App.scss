@@ -1,5 +1,17 @@
+@import './Question.scss';
+
+#root {
+  height: 100%;
+}
+
 .App {
   text-align: center;
+  background-color: purple;
+  // height: 100vh;
+  height: 100%;
+  background: url('../src/assets/background.png');
+  background-size: cover;
+  font-family: 'Poppins', sans-serif;
 }
 
 .App-logo {
@@ -28,11 +40,8 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1 {
+  margin: 0px;
+  padding-top: 50px;
 }
+
