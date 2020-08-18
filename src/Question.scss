@@ -1,28 +1,87 @@
 .card-container {
-    max-width: 464px;
-    // min-height: 559px;
-    border-radius: 24px;
-    background-color: white;
-    margin: 0px auto;
-    padding: 32px;
+  max-width: 464px;
+  // min-height: 559px;
+  border-radius: 24px;
+  background-color: white;
+  margin: 0px auto;
+  padding: 32px;
+  box-sizing: border-box;
+  position: relative;
+
+  .card-container__inner {
+      text-align: right;
+  }
+
+  div, ul {
+    text-align: left;
+  }
+
+  .card-img {
+    position: absolute;
+    top: -74px;
+    right: 0px;
+  }
+
+  .flag-img {
+    max-width: 84px;
+    box-shadow: (0px 4px 24px rgba(0, 0, 0, 0.1));
+    border-radius: 4px;
+    margin-top: 40px;
+  }
+
+  .question {
+    color: #1d355d;
+    font-size: 24px;
+    line-height: 1.5;
+    align-self: start;
+    margin: 30px 0px;
+  }
+
+  .nxt-btn {
+      background-color: #F9A826;
+      color: white;
+      border-radius: 12px;
+      border: none;
+      font-size: 18px;
+      padding: 15px 35px;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+  }
 }
 
 .answer-choice {
-    border: 2px solid rgba(96, 102, 208, 0.7);
-    border-radius: 12px;
-    padding: 10px 20px;
-    list-style-type: none;
-    margin-bottom: 30px;
+  border: 2px solid rgba(96, 102, 208, 0.7);
+  border-radius: 12px;
+  padding: 10px 20px;
+  list-style-type: none;
+  margin-bottom: 30px;
+  color: rgba(96, 102, 208, 0.8);
+  font-size: 18px;
+  line-height: 1.5;
+  display: grid;
+  grid-template-columns: 60px 1fr 30px;
+  align-items: center;
+
+  &:hover {
+    background-color: #f9a826;
+    border: 2px solid #f9a826;
+    color: white;
+  }
+
+  .label {
+    font-size: 24px;
+    line-height: 1.5;
+  }
 }
 
 .correct {
-    background-color: #60BF88;
-    border: 2px solid #60BF88;
-    color: white;
+  background-color: #60bf88;
+  border: 2px solid #60bf88;
+  color: white;
 }
 
 .incorrect {
-    background-color: #EA8282;
-    border: 2px solid #EA8282;
-    color: white;
+  background-color: #ea8282;
+  border: 2px solid #ea8282;
+  color: white;
 }

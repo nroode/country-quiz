@@ -23,7 +23,7 @@ class Question extends React.Component {
     console.log(this.props.quizAnswerIndex)
     return (
       <div>
-        <h2>{this.props.questionSet[this.props.quizAnswerIndex].capital} is the capital of ... ?</h2>
+        <h2 className="question">{this.props.questionSet[this.props.quizAnswerIndex].capital} is the capital of ... ?</h2>
       </div>
     );
   }
@@ -32,8 +32,8 @@ class Question extends React.Component {
     console.log(this.props.questionSet[this.props.quizAnswerIndex].flag)
     return (
       <div>
-        <img src={this.props.questionSet[this.props.quizAnswerIndex].flag} width="200"></img>
-        <h2>Which country does this flag belong to? </h2>
+        <img src={this.props.questionSet[this.props.quizAnswerIndex].flag} className="flag-img" alt="flag"></img>
+        <h2 className="question">Which country does this flag belong to? </h2>
       </div>
     );
   }
@@ -46,7 +46,11 @@ class Question extends React.Component {
 
     if (Number(e.target.id) !== this.props.quizAnswerIndex) {
       e.target.className = "answer-choice incorrect";
-    } 
+    }  
+    
+    if (Number(e.target.id) === this.props.quizAnswerIndex) {
+      this.props.addPoint();
+    }
     
     let correctAnswer = document.getElementById(this.props.quizAnswerIndex);
     correctAnswer.className = "answer-choice correct";
@@ -57,6 +61,7 @@ class Question extends React.Component {
   }
 
   render() {
+    let labels = ['A', 'B', 'C', 'D'];
     // console.log(this.props.quizQuestionVersion);
     // console.log(this.props.quizAnswerIndex);
     return (
@@ -68,11 +73,11 @@ class Question extends React.Component {
 
           <ul className="answer-choices">
             {this.props.questionSet.map((country, id) => (
-              <li id={id} key={id} className="answer-choice" onClick={this.checkAnswer}> {country.name} </li>
+              <li id={id} key={id} className="answer-choice" onClick={this.checkAnswer}><span className="label">{labels[id]}</span> {country.name} </li>
             ))}
           </ul>
           {this.props.isAnswerPicked ? 
-          <button onClick={() => this.props.nextQuestion()}>Next</button> :
+          <button className="nxt-btn" onClick={() => this.props.nextQuestion()}>Next</button> :
           ''}
         </div>
       </div>

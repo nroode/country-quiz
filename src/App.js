@@ -3,6 +3,7 @@ import "./App.scss";
 import Question from "./Components/Question";
 import Home from "./Components/Home";
 import axios from "axios";
+import cardImage from "./assets/undraw_adventure.svg";
 
 class App extends React.Component {
   
@@ -89,23 +90,6 @@ class App extends React.Component {
   
     this.setState({ quizData });
     this.renderPage(quizData);
-    // this.renderPage(quizData);
-
-
-    // if(this.state.quizData !== quizData){
-    //   console.log('not equal')
-    //   this.setState({ quizData });
-    // }
-   
-    // if (this.state.quizData !== quizData) {
-    //   this.setState({ quizData })
-    //   console.log('set quiz data')
-    // }
-    // console.log(this._isMounted);
-    // if (this._isMounted) {
-    //   this.setState({ quizData })
-    //   console.log('is mounted')
-    // }
     
   }
 
@@ -116,8 +100,6 @@ class App extends React.Component {
     });
     // console.log(this.state.quizData);
     this.resetQuizData();
-    
-
   }
 
 
@@ -146,6 +128,10 @@ class App extends React.Component {
     this.setState({ isAnswerPicked: true })
   }
 
+  addPoint = () => {
+    this.setState( prevState => ({ quizCorrectAnswers: prevState.quizCorrectAnswers++ }));
+  }
+
   nextQuestion = () => {
     //remove next button
     this.setState({ isAnswerPicked: false });
@@ -170,6 +156,7 @@ class App extends React.Component {
       <div className="App">
         <h1>Country Quiz</h1>
         <div className="card-container">
+        <img src={cardImage} class="card-img" alt="people"></img>
           {this.state.home ? (
             <Home startQuiz={() => this.startQuiz()} />
           ) : (
@@ -183,6 +170,7 @@ class App extends React.Component {
             nextQuestion={this.nextQuestion}
             isAnswerPicked={this.state.isAnswerPicked}
             hideNext={this.hideNext}
+            addPoint={this.addPoint}
              />
           )}
         </div>
