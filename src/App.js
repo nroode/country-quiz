@@ -157,7 +157,7 @@ class App extends React.Component {
       <div className="App">
         <h1>Country Quiz</h1>
         <div className="card-container">
-        <img src={cardImage} className="card-img" alt="people"></img>
+        
           {this.state.home ? (
             <Home startQuiz={() => this.startQuiz()} />
           ) : this.state.quizPage <= 7 ? (

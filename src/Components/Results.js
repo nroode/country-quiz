@@ -8,7 +8,7 @@ class Results extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="results-card">
             <img alt="winner img" src={resultsImage}></img>
             <h2>Results</h2>
             <p>You got <span className="correct-count">{this.props.quizCorrectAnswers}</span> correct answers</p>

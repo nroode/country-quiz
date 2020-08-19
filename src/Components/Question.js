@@ -1,4 +1,5 @@
 import React from "react";
+import cardImage from "../assets/undraw_adventure.svg";
 
 //Note - filter out countries without capitals? e.g., McDonald Isalnd? 
 //Bug - if click on letter don't want it to turn red just full answer
@@ -55,6 +56,7 @@ class Question extends React.Component {
     
     let correctAnswer = document.getElementById(this.props.quizAnswerIndex);
     correctAnswer.className = "answer-choice correct";
+    
         
     //display nextButton
     this.props.hideNext();
@@ -67,6 +69,7 @@ class Question extends React.Component {
     // console.log(this.props.quizAnswerIndex);
     return (
       <div>
+      <img src={cardImage} className="card-img" alt="people"></img>
         <div className="card-container__inner">
           {this.props.quizQuestionVersion === "capital"
             ? this.questionA()
