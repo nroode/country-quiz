@@ -1,6 +1,7 @@
 import React from "react";
 
 //Note - filter out countries without capitals? e.g., McDonald Isalnd? 
+//Bug - if click on letter don't want it to turn red just full answer
 
 //make API call by country's name
 //6*4 -- store 24 random countrys in state

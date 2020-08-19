@@ -37,7 +37,7 @@ class App extends React.Component {
       .then(res => {
         if (this._isMounted) {
           const countryData = res.data;
-          console.log(countryData);
+          // console.log(countryData);
           this.setState({
             error: false,
             countryData,
@@ -60,7 +60,17 @@ class App extends React.Component {
     // this.resetQuizData();
   }
 
-  resetQuizData() {
+  startQuiz = () => {
+    this.setState(({
+      home: false,
+      quizPage: 1,
+      quizCorrectAnswers: 0,
+    }));
+
+    this.resetQuizData();
+  }
+
+  resetQuizData = () => {
     var countrySelects = [];
     //randomly select 24 indices
     while (countrySelects.length < 24) {
@@ -68,6 +78,8 @@ class App extends React.Component {
       //make sure country isn't included already 
       if (countrySelects.indexOf(r) === -1) countrySelects.push(r);
     }
+
+    // console.log(countrySelects);
 
     this.setState({ countrySelects});
     this.getQuizData(countrySelects);
@@ -77,39 +89,26 @@ class App extends React.Component {
     this._isMounted = false;
   }
 
-  getQuizData(countrySelects) {
+  getQuizData = (countrySelects) => {
    
     //filter the quizData 
     let quizSelects = countrySelects;
     let quizData = [];
-    // this.state.countryData.filter((country, i) => this.state.countrySelects.indexOf(i) > -1);
+   
     //in all the data, find the country whose index matches the value in the selects list
     for (var i = 0; i < quizSelects.length; i++) {
       quizData.push(this.state.countryData.find((el, j) => quizSelects[i] === j))
     }
-    // console.log(quizData);
   
     this.setState({ quizData });
-    this.renderPage(quizData);
-    
+    this.renderPage(quizData, 1);
+
   }
-
-
-  startQuiz() {
-    this.setState({
-      home: false,
-    });
-    // console.log(this.state.quizData);
-    this.resetQuizData();
-  }
-
 
 
   //either start page, question, or results
 
   renderPage = (quizData, page = this.state.quizPage, questionsPerPage = 4) => {
-    console.log(quizData);
-    
 
     const start = (page - 1) * questionsPerPage;
     const end = questionsPerPage * page;
@@ -120,7 +119,8 @@ class App extends React.Component {
     console.log(quizAnswerIndex);
 
     console.log(this.state.quizPage);
-    this.setState({ questionSet, quizAnswerIndex })
+    this.setState({ questionSet, quizAnswerIndex });
+   
     this.setState(prevState => ({ quizPage: prevState.quizPage++ }));
     
   };
@@ -134,6 +134,7 @@ class App extends React.Component {
   }
 
   nextQuestion = () => {
+    
     //remove next button
     this.setState({ isAnswerPicked: false });
 
@@ -141,7 +142,6 @@ class App extends React.Component {
     let choices = document.querySelectorAll('.answer-choice');
     choices.forEach(item => item.className = "answer-choice");
 
-    console.log(`the page is ${this.state.quizPage}`)
     this.renderPage(this.state.quizData, this.state.quizPage );
   }
 
@@ -153,7 +153,6 @@ class App extends React.Component {
 
 
   render() {
-    console.log(this.state.quizPage);
     return (
       <div className="App">
         <h1>Country Quiz</h1>
@@ -173,7 +172,11 @@ class App extends React.Component {
             isAnswerPicked={this.state.isAnswerPicked}
             hideNext={this.hideNext}
             addPoint={this.addPoint}
-             />) : <Results />
+             />) : <Results
+             quizCorrectAnswers={this.state.quizCorrectAnswers}
+             resetQuizData={this.resetQuizData}
+             startQuiz={this.startQuiz}
+             />
         }
         </div>
       </div>
