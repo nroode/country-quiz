@@ -2,6 +2,7 @@ import React from "react";
 import "./App.scss";
 import Question from "./Components/Question";
 import Home from "./Components/Home";
+import Results from "./Components/Results";
 import axios from "axios";
 import cardImage from "./assets/undraw_adventure.svg";
 
@@ -152,14 +153,15 @@ class App extends React.Component {
 
 
   render() {
+    console.log(this.state.quizPage);
     return (
       <div className="App">
         <h1>Country Quiz</h1>
         <div className="card-container">
-        <img src={cardImage} class="card-img" alt="people"></img>
+        <img src={cardImage} className="card-img" alt="people"></img>
           {this.state.home ? (
             <Home startQuiz={() => this.startQuiz()} />
-          ) : (
+          ) : this.state.quizPage <= 7 ? (
             <Question 
             quizData={this.state.quizData}
             renderPage={this.renderPage}
@@ -171,8 +173,8 @@ class App extends React.Component {
             isAnswerPicked={this.state.isAnswerPicked}
             hideNext={this.hideNext}
             addPoint={this.addPoint}
-             />
-          )}
+             />) : <Results />
+        }
         </div>
       </div>
     );
