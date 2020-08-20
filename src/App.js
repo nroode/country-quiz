@@ -4,7 +4,6 @@ import Question from "./Components/Question";
 import Home from "./Components/Home";
 import Results from "./Components/Results";
 import axios from "axios";
-import cardImage from "./assets/undraw_adventure.svg";
 
 class App extends React.Component {
   
@@ -140,16 +139,13 @@ class App extends React.Component {
 
     //clear any right/wrong colors
     let choices = document.querySelectorAll('.answer-choice');
+    let choiceIcons = document.querySelectorAll('.material-icons');
+    
     choices.forEach(item => item.className = "answer-choice");
+    choiceIcons.forEach(choice => choice.remove());
 
     this.renderPage(this.state.quizData, this.state.quizPage );
   }
-
-  //user clicks an answer
-
-  //if correct, correct answer shows as green and next button appears 
-
-  //if incorrect, correct answer shows as green, incorrect shows as red
 
 
   render() {

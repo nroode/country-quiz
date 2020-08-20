@@ -22,7 +22,6 @@ class Question extends React.Component {
   //cycle through questions in groups of 4
 
   questionA() {
-    console.log(this.props.quizAnswerIndex)
     return (
       <div>
         <h2 className="question">{this.props.questionSet[this.props.quizAnswerIndex].capital} is the capital of ... ?</h2>
@@ -31,7 +30,6 @@ class Question extends React.Component {
   }
 
   questionB() {
-    console.log(this.props.questionSet[this.props.quizAnswerIndex].flag)
     return (
       <div>
         <img src={this.props.questionSet[this.props.quizAnswerIndex].flag} className="flag-img" alt="flag"></img>
@@ -42,21 +40,25 @@ class Question extends React.Component {
 
   checkAnswer = (e) => {
     //check if IDs match 
+    let correctAnswer = document.getElementById(this.props.quizAnswerIndex);
+    let correctIcon = `<i class="material-icons">check_circle_outline</i>`
+    let incorrectIcon = `<i class="material-icons">highlight_off</i>`
 
-    console.log(Number(e.target.id));
-    console.log(this.props.quizAnswerIndex);
 
     if (Number(e.target.id) !== this.props.quizAnswerIndex) {
-      e.target.closest(".answer-choice").className = "answer-choice incorrect";
+      let incorrectAnswer = e.target.closest(".answer-choice");
+      incorrectAnswer.className = "answer-choice incorrect";
+      incorrectAnswer.insertAdjacentHTML('beforeend', incorrectIcon)
+
     }  
     
     if (Number(e.target.id) === this.props.quizAnswerIndex) {
       this.props.addPoint();
     }
     
-    let correctAnswer = document.getElementById(this.props.quizAnswerIndex);
+
     correctAnswer.className = "answer-choice correct";
-    
+    correctAnswer.insertAdjacentHTML('beforeend', correctIcon)
         
     //display nextButton
     this.props.hideNext();
