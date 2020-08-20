@@ -136,7 +136,7 @@ class App extends React.Component {
   nextQuestion = () => {
     
     //remove next button
-    this.setState({ isAnswerPicked: false });
+    this.setState( prevState => ({ isAnswerPicked: false, quizFlagVersion: !prevState.quizFlagVersion }));
 
     //clear any right/wrong colors
     let choices = document.querySelectorAll('.answer-choice');

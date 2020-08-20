@@ -71,7 +71,7 @@ class Question extends React.Component {
       <div>
       <img src={cardImage} className="card-img" alt="people"></img>
         <div className="card-container__inner">
-          {this.props.quizFlagVersion === "capital"
+          {this.props.quizFlagVersion
             ? this.questionA()
             : this.questionB()}
 
