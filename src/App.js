@@ -20,7 +20,7 @@ class App extends React.Component {
       countryData: [],
       quizData: [],
       questionSet: [],
-      quizQuestionVersion: 'flag',
+      quizFlagVersion: true,
       quizPage: 1,
       quizAnswerIndex: 0,
       quizCorrectAnswers: 0,
@@ -165,7 +165,7 @@ class App extends React.Component {
             quizData={this.state.quizData}
             renderPage={this.renderPage}
             quizAnswerIndex={this.state.quizAnswerIndex}
-            quizQuestionVersion={this.state.quizQuestionVersion}
+            quizFlagVersion={this.state.quizFlagVersion}
             questionSet={this.state.questionSet}
             quizPage={this.state.quizPage}
             nextQuestion={this.nextQuestion}

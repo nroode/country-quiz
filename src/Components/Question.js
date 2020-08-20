@@ -47,7 +47,7 @@ class Question extends React.Component {
     console.log(this.props.quizAnswerIndex);
 
     if (Number(e.target.id) !== this.props.quizAnswerIndex) {
-      e.target.className = "answer-choice incorrect";
+      e.target.closest(".answer-choice").className = "answer-choice incorrect";
     }  
     
     if (Number(e.target.id) === this.props.quizAnswerIndex) {
@@ -65,13 +65,13 @@ class Question extends React.Component {
 
   render() {
     let labels = ['A', 'B', 'C', 'D'];
-    // console.log(this.props.quizQuestionVersion);
+    // console.log(this.props.quizFlagVersion);
     // console.log(this.props.quizAnswerIndex);
     return (
       <div>
       <img src={cardImage} className="card-img" alt="people"></img>
         <div className="card-container__inner">
-          {this.props.quizQuestionVersion === "capital"
+          {this.props.quizFlagVersion === "capital"
             ? this.questionA()
             : this.questionB()}
 
