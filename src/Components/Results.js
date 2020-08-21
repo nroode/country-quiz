@@ -2,9 +2,6 @@ import React from "react";
 import resultsImage from "../assets/undraw_winners.svg";
 
 class Results extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (

@@ -1,5 +1,6 @@
 @import "./Question.scss";
 @import "./Results.scss";
+@import "./Base.scss";
 
 #root {
   height: 100%;
@@ -7,12 +8,14 @@
 
 .App {
   text-align: left;
-  background-color: purple;
   overflow: scroll;
   height: 100%;
   background: url("../src/assets/background.png");
   background-size: cover;
   font-family: "Poppins", sans-serif;
+  display: grid;
+  align-items: center;
+  padding: 30px;
 
   h1 {
     max-width: 464px;
@@ -25,44 +28,59 @@
   }
 }
 
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
-.start-btn {
-  background-color: #f9a826;
-  color: white;
-  border-radius: 12px;
-  border: none;
-  font-size: 18px;
-  padding: 15px 35px;
-  font-weight: 700;
-  font-family: "Poppins", sans-serif;
-}
+.home-card {
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  h2 {
+    text-align: center;
+    color: #1d355d;
+    font-size: 24px;
+    line-height: 1.5;
+    margin: 60px auto;
+  }
+
+  .start-btn {
+    background-color: #f9a826;
+    color: white;
+    border-radius: 12px;
+    border: none;
+    font-size: 18px;
+    padding: 15px 35px;
+    font-weight: 700;
+    font-family: "Poppins", sans-serif;
+    display: block;
+    margin: 0px auto;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+@media(max-width: 1224px){
+  .App{
+    h1 {
+      font: $font-med;
+    }
+  }
+
+
+.home-card {
+
+  h2 {
+    font: $font-small;
+    margin: 30px auto;
+    font-weight: 700;
+
+  }
+
+  .start-btn {
+    font: $font-Xsmall;
+    padding: 10px 30px;
+    font-weight: 700;
+  }
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-h1 {
-  margin: 0px;
-  padding-top: 50px;
 }

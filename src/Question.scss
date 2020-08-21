@@ -1,3 +1,5 @@
+@import "./Base.scss";
+
 .card-container {
   max-width: 464px;
   // min-height: 559px;
@@ -30,9 +32,8 @@
   }
 
   .question {
-    color: #1d355d;
-    font-size: 24px;
-    line-height: 1.5;
+    color: $navy-blue;
+    font: $font-med;
     align-self: start;
     margin: 30px 0px;
   }
@@ -40,24 +41,22 @@
   .nxt-btn {
       background-color: #F9A826;
       color: white;
-      border-radius: 12px;
+      border-radius: $reg-border-radius;
       border: none;
-      font-size: 18px;
+      font: $font-small;
       padding: 15px 35px;
       font-weight: 700;
-      font-family: 'Poppins', sans-serif;
   }
 }
 
 .answer-choice {
   border: 2px solid rgba(96, 102, 208, 0.7);
-  border-radius: 12px;
+  border-radius: $reg-border-radius;
   padding: 10px 20px;
   list-style-type: none;
   margin-bottom: 30px;
   color: rgba(96, 102, 208, 0.8);
-  font-size: 18px;
-  line-height: 1.5;
+  font: $font-small;
   display: grid;
   grid-template-columns: 60px 1fr 30px;
   align-items: center;
@@ -69,8 +68,8 @@
   }
 
   .label {
-    font-size: 24px;
-    line-height: 1.5;
+    font: $font-med;
+    font-weight: 600;
   }
 
   i {
@@ -88,4 +87,45 @@
   background-color: #ea8282;
   border: 2px solid #ea8282;
   color: white;
+}
+
+@media(max-width: 1224px) {
+
+  .card-container {
+    padding: 20px;
+
+    .question {
+      font: $font-small;
+      font-weight: 700;
+      margin: 20px 0px;
+    }
+
+    .card-img {
+      max-width: 130px;
+      top: -70px;
+    }
+
+    .nxt-btn {
+      font: $font-Xsmall;
+      font-weight: 700;
+      padding: 10px 30px;
+    }
+  }
+
+  .answer-choice {
+    padding: 7px 20px;
+    margin-bottom: 20px;
+    font: $font-Xsmall;
+    grid-template-columns: 30px 1fr 30px;
+  
+    .label {
+      font: $font-small;
+    }
+
+    i {
+      font-size: 20px;
+    }
+  
+  }
+  
 }

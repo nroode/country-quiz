@@ -1,3 +1,5 @@
+@import "./Base.scss";
+
 .card-container {
     .results-card {
         text-align: center;
@@ -10,6 +12,10 @@
             line-height: 72px;
             margin-top: 72px;
             margin-bottom: 12px;
+            color: #1D355D;
+        }
+
+        p {
             color: #1D355D;
         }
 
@@ -34,4 +40,30 @@
 
 
     }
+}
+
+@media (max-width: 1224px) {
+
+    .card-container {
+        font: $font-Xsmall;
+
+        .results-card {
+            h2 {
+                font: $font-lg;
+                margin-top: 30px;
+            }
+
+            .correct-count {
+                font: $font-lg;
+            }
+
+            button {
+                font: $font-Xsmall;
+                font-weight: 700;
+                padding: 10px 30px;
+                margin-top: 50px;
+              }
+        }
+    }
+
 }
