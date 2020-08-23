@@ -28,13 +28,11 @@ class App extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
-    console.log(this._isMounted);
     axios
       .get("https://restcountries.eu/rest/v2/all")
       .then((res) => {
         if (this._isMounted) {
           const countryData = res.data;
-          // console.log(countryData);
           this.setState({
             error: false,
             countryData,
@@ -53,8 +51,6 @@ class App extends React.Component {
           isLoading: false,
         });
       });
-
-    // this.resetQuizData();
   }
 
   startQuiz = () => {
@@ -69,15 +65,11 @@ class App extends React.Component {
 
   resetQuizData = () => {
     var countrySelects = [];
-    //randomly select 24 indices
     while (countrySelects.length < 24) {
       var r = Math.floor(Math.random() * 250);
       //make sure country isn't included already
       if (countrySelects.indexOf(r) === -1) countrySelects.push(r);
     }
-
-    // console.log(countrySelects);
-
     this.setState({ countrySelects });
     this.getQuizData(countrySelects);
   };
@@ -102,8 +94,6 @@ class App extends React.Component {
     this.renderPage(quizData, 1);
   };
 
-  //either start page, question, or results
-
   renderPage = (quizData, page = this.state.quizPage, questionsPerPage = 4) => {
     const start = (page - 1) * questionsPerPage;
     const end = questionsPerPage * page;
@@ -111,11 +101,7 @@ class App extends React.Component {
     let questionSet = quizData.slice(start, end);
 
     var quizAnswerIndex = Math.floor(Math.random() * 4);
-    console.log(quizAnswerIndex);
-
-    console.log(this.state.quizPage);
     this.setState({ questionSet, quizAnswerIndex });
-
     this.setState((prevState) => ({ quizPage: prevState.quizPage++ }));
   };
 
@@ -130,13 +116,12 @@ class App extends React.Component {
   };
 
   nextQuestion = () => {
-    //remove next button
     this.setState((prevState) => ({
       isAnswerPicked: false,
       quizFlagVersion: !prevState.quizFlagVersion,
     }));
 
-    //clear any right/wrong colors
+    //clear any right/wrong colors and icons for next question
     let choices = document.querySelectorAll(".answer-choice");
     let choiceIcons = document.querySelectorAll(".material-icons");
 
@@ -147,6 +132,7 @@ class App extends React.Component {
   };
 
   render() {
+    const { quizAnswerIndex, quizFlagVersion, questionSet, isAnswerPicked, quizCorrectAnswers } = this.state;
     return (
       <div className="App">
         <div>
@@ -156,20 +142,17 @@ class App extends React.Component {
               <Home startQuiz={() => this.startQuiz()} />
             ) : this.state.quizPage <= 7 ? (
               <Question
-                quizData={this.state.quizData}
-                renderPage={this.renderPage}
-                quizAnswerIndex={this.state.quizAnswerIndex}
-                quizFlagVersion={this.state.quizFlagVersion}
-                questionSet={this.state.questionSet}
-                quizPage={this.state.quizPage}
+                quizAnswerIndex={quizAnswerIndex}
+                quizFlagVersion={quizFlagVersion}
+                questionSet={questionSet}
                 nextQuestion={this.nextQuestion}
-                isAnswerPicked={this.state.isAnswerPicked}
+                isAnswerPicked={isAnswerPicked}
                 hideNext={this.hideNext}
                 addPoint={this.addPoint}
               />
             ) : (
               <Results
-                quizCorrectAnswers={this.state.quizCorrectAnswers}
+                quizCorrectAnswers={quizCorrectAnswers}
                 resetQuizData={this.resetQuizData}
                 startQuiz={this.startQuiz}
               />

@@ -1,94 +1,84 @@
 import React from "react";
 import cardImage from "../assets/undraw_adventure.svg";
 
-//Note - filter out countries without capitals? e.g., McDonald Isalnd? 
-//Bug - if click on letter don't want it to turn red just full answer
+//Note - filter out countries without capitals? e.g., McDonald Isalnd?
 
-//make API call by country's name
-//6*4 -- store 24 random countrys in state
-//take first 4 countries, show capital of one
-
-class Question extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      
-    };
-  }
-
-  //set question type - capital or flag question
-  //
-
-  //cycle through questions in groups of 4
-
-  questionA() {
+const Question = (props) => {
+  const questionA = () => {
     return (
       <div>
-        <h2 className="question">{this.props.questionSet[this.props.quizAnswerIndex].capital} is the capital of ... ?</h2>
+        <h2 className="question">
+          {props.questionSet[props.quizAnswerIndex].capital} is the capital of
+          ... ?
+        </h2>
       </div>
     );
-  }
+  };
 
-  questionB() {
+  const questionB = () => {
     return (
       <div>
-        <img src={this.props.questionSet[this.props.quizAnswerIndex].flag} className="flag-img" alt="flag"></img>
+        <img
+          src={props.questionSet[props.quizAnswerIndex].flag}
+          className="flag-img"
+          alt="flag"
+        ></img>
         <h2 className="question">Which country does this flag belong to? </h2>
       </div>
     );
-  }
+  };
 
-  checkAnswer = (e) => {
-    //check if IDs match 
-    let correctAnswer = document.getElementById(this.props.quizAnswerIndex);
-    let correctIcon = `<i class="material-icons">check_circle_outline</i>`
-    let incorrectIcon = `<i class="material-icons">highlight_off</i>`
+  const checkAnswer = (e) => {
+    //check if IDs match
+    let correctAnswer = document.getElementById(props.quizAnswerIndex);
+    const correctIcon = `<i class="material-icons">check_circle_outline</i>`;
+    const incorrectIcon = `<i class="material-icons">highlight_off</i>`;
 
-
-    if (Number(e.target.id) !== this.props.quizAnswerIndex) {
+    if (Number(e.target.id) !== props.quizAnswerIndex) {
       let incorrectAnswer = e.target.closest(".answer-choice");
       incorrectAnswer.className = "answer-choice incorrect";
-      incorrectAnswer.insertAdjacentHTML('beforeend', incorrectIcon)
-
-    }  
-    
-    if (Number(e.target.id) === this.props.quizAnswerIndex) {
-      this.props.addPoint();
+      incorrectAnswer.insertAdjacentHTML("beforeend", incorrectIcon);
     }
-    
+
+    if (Number(e.target.id) === props.quizAnswerIndex) {
+      props.addPoint();
+    }
 
     correctAnswer.className = "answer-choice correct";
-    correctAnswer.insertAdjacentHTML('beforeend', correctIcon)
-        
-    //display nextButton
-    this.props.hideNext();
+    correctAnswer.insertAdjacentHTML("beforeend", correctIcon);
 
-  }
+    props.hideNext();
+  };
 
-  render() {
-    let labels = ['A', 'B', 'C', 'D'];
-    // console.log(this.props.quizFlagVersion);
-    // console.log(this.props.quizAnswerIndex);
-    return (
-      <div>
+  let labels = ["A", "B", "C", "D"];
+  return (
+    <div>
       <img src={cardImage} className="card-img" alt="people"></img>
-        <div className="card-container__inner">
-          {this.props.quizFlagVersion
-            ? this.questionA()
-            : this.questionB()}
+      <div className="card-container__inner">
+        {props.quizFlagVersion ? questionA() : questionB()}
 
-          <ul className="answer-choices">
-            {this.props.questionSet.map((country, id) => (
-              <li id={id} key={id} className="answer-choice" onClick={this.checkAnswer}><span className="label">{labels[id]}</span> {country.name} </li>
-            ))}
-          </ul>
-          {this.props.isAnswerPicked ? 
-          <button className="nxt-btn" onClick={() => this.props.nextQuestion()}>Next</button> :
-          ''}
-        </div>
+        <ul className="answer-choices">
+          {props.questionSet.map((country, id) => (
+            <li
+              id={id}
+              key={id}
+              className="answer-choice"
+              onClick={checkAnswer}
+            >
+              <span className="label">{labels[id]}</span> {country.name}{" "}
+            </li>
+          ))}
+        </ul>
+        {props.isAnswerPicked ? (
+          <button className="nxt-btn" onClick={() => props.nextQuestion()}>
+            Next
+          </button>
+        ) : (
+          ""
+        )}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Question;
