@@ -82,12 +82,13 @@ class App extends React.Component {
     //filter the quizData
     let quizSelects = countrySelects;
     let quizData = [];
+    console.log(quizSelects);
 
     //in all the data, find the country whose index matches the value in the selects list
     for (var i = 0; i < quizSelects.length; i++) {
-      quizData.push(
-        this.state.countryData.find((el, j) => quizSelects[i] === j)
-      );
+      
+        let item = this.state.countryData.find((el, j) => quizSelects[i] === j)
+        quizData.push(item);
     }
 
     this.setState({ quizData });
@@ -95,6 +96,7 @@ class App extends React.Component {
   };
 
   renderPage = (quizData, page = this.state.quizPage, questionsPerPage = 4) => {
+    console.log(quizData);
     const start = (page - 1) * questionsPerPage;
     const end = questionsPerPage * page;
 

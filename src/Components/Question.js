@@ -29,6 +29,9 @@ const Question = (props) => {
   };
 
   const checkAnswer = (e) => {
+
+    if (!props.isAnswerPicked) {
+
     //check if IDs match
     let correctAnswer = document.getElementById(props.quizAnswerIndex);
     const correctIcon = `<i class="material-icons">check_circle_outline</i>`;
@@ -46,6 +49,8 @@ const Question = (props) => {
 
     correctAnswer.className = "answer-choice correct";
     correctAnswer.insertAdjacentHTML("beforeend", correctIcon);
+
+  }
 
     props.hideNext();
   };
