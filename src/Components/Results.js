@@ -9,7 +9,7 @@ const Results = (props) => {
       <p>
         You got{" "}
         <span className="correct-count">{ props.quizCorrectAnswers }</span>{" "}
-        correct answer{props.quizCorrectAnswers > 1 ? 's' : ''}
+        correct answer{props.quizCorrectAnswers !== 1 ? 's' : ''}
       </p>
       <button onClick={() => props.startQuiz()}>Try again</button>
     </div>
