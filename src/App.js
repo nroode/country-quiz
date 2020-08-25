@@ -134,7 +134,7 @@ class App extends React.Component {
 
     var quizAnswerIndex = Math.floor(Math.random() * 4);
     this.setState({ questionSet, quizAnswerIndex });
-    this.setState((prevState) => ({ quizPage: prevState.quizPage+ 1 }));
+    this.setState((prevState) => ({ quizPage: prevState.quizPage + 1 }));
   };
 
   render() {
