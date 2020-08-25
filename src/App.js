@@ -95,18 +95,6 @@ class App extends React.Component {
     this.renderPage(quizData, 1);
   };
 
-  renderPage = (quizData, page = this.state.quizPage, questionsPerPage = 4) => {
-    console.log(quizData);
-    const start = (page - 1) * questionsPerPage;
-    const end = questionsPerPage * page;
-
-    let questionSet = quizData.slice(start, end);
-
-    var quizAnswerIndex = Math.floor(Math.random() * 4);
-    this.setState({ questionSet, quizAnswerIndex });
-    this.setState((prevState) => ({ quizPage: prevState.quizPage++ }));
-  };
-
   hideNext = () => {
     this.setState({ isAnswerPicked: true });
   };
@@ -130,7 +118,23 @@ class App extends React.Component {
     choices.forEach((item) => (item.className = "answer-choice"));
     choiceIcons.forEach((choice) => choice.remove());
 
+    console.log(this.state.quizData, this.state.quizPage);
+
     this.renderPage(this.state.quizData, this.state.quizPage);
+  };
+
+  renderPage = (quizData, page = this.state.quizPage, questionsPerPage = 4) => {
+    console.log(quizData);
+    console.log(page);
+    const start = (page - 1) * questionsPerPage;
+    const end = questionsPerPage * page;
+
+    let questionSet = quizData.slice(start, end);
+    console.log(questionSet);
+
+    var quizAnswerIndex = Math.floor(Math.random() * 4);
+    this.setState({ questionSet, quizAnswerIndex });
+    this.setState((prevState) => ({ quizPage: prevState.quizPage + 1 }));
   };
 
   render() {
