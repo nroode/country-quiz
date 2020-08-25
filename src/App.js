@@ -100,7 +100,7 @@ class App extends React.Component {
 
   addPoint = () => {
     this.setState((prevState) => ({
-      quizCorrectAnswers: prevState.quizCorrectAnswers++,
+      quizCorrectAnswers: prevState.quizCorrectAnswers + 1,
     }));
   };
 
